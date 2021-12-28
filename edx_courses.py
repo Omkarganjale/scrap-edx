@@ -112,7 +112,7 @@ try:
             
             pre = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]/div/div[2]//div[@class='row']/div[1]/ul//*[self::p or self::div]")
 
-            out = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]/div/div[3 or 4]/div[@class='preview-expand-component']/div[2]/div/*")
+            out = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]/div/div[3]/div[@class='preview-expand-component']/div[2]")
             
             lan = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]//div[@class='row']/div[2]/ul/li[1]")
             
