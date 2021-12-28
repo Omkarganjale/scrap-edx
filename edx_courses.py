@@ -79,7 +79,7 @@ try:
             
             # NEXT button on course result page
             NEXT_BTN = driver.find_element(By.XPATH,"/html//main[@id='main-content']/div[@class='new-search-page search-results']/div[3]/div//div[@class='pgn__data-table-wrapper']/div[1]/nav/ul[@class='pagination']//button[@class='btn next page-link']")
-
+            
             # if cnt<MAX_COURSES_PER_SUBJECT and NEXT_BTN is enabled
             if(cnt<MAX_COURSES_PER_SUBJECT and NEXT_BTN.is_enabled()):
                 NEXT_BTN.click()
@@ -99,33 +99,33 @@ try:
 
             #tit = driver.find_element_by_xpath("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[@class='header']//h1").text
             tit = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[@class='header']//h1")
-
+            
             des = isPresent("//div[@class='p']")
 
             wee = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[@class='d-flex flex-column flex-sm-column-reverse']/div[@class='course-snapshot-background']//div[@class='course-snapshot-content py-2 text-primary-500']/div/div[1]/div[@class='ml-3']/div[@class='h4 mb-0']")
-            wee = wee.replace('Estimated ','').replace(' weeks', '')
-
+            
             hou = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[@class='d-flex flex-column flex-sm-column-reverse']/div[@class='course-snapshot-background']//div[@class='course-snapshot-content py-2 text-primary-500']/div/div[1]/div[@class='ml-3']/div[@class='small']")
-            hou = hou.replace('hours per week','')
-
+            
             ins = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]//div[@class='row']/div[1]/ul/li[1]")
-            ins = ins.replace('Institution: ', '')
-
+            
             lev = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]//div[@class='row']/div[1]/ul/li[3]")
-            lev = lev.replace('Level: ', '')
-
+            
             pre = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]/div/div[2]//div[@class='row']/div[1]/ul//*[self::p or self::div]")
 
-            out = driver.find_element(By.XPATH, "/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]/div/div[3 or 4]/div[@class='preview-expand-component']/div[2]/div/*").get_attribute('innerHTML')
+            out = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]/div/div[3 or 4]/div[@class='preview-expand-component']/div[2]/div/*")
             
             lan = isPresent("/html//main[@id='main-content']/div[@class='course-about course-info-content']/div[3]//div[@class='row']/div[2]/ul/li[1]")
-            lan = lan.replace('Language: ','')
-
             
             #print(tit, des, wee, hou, ins, lev, pre, out, lan, sep='\n')
-
             if( not(tit and des and wee and hou and ins and lev and pre and lan and len(out)) ):
                 continue
+            
+            # cleaning
+            wee = wee.replace('Estimated ','').replace(' weeks', '')
+            hou = hou.replace('hours per week','')
+            ins = ins.replace('Institution: ', '')
+            lev = lev.replace('Level: ', '')
+            lan = lan.replace('Language: ','')
 
             # append values into list
             subj.append(subject)
@@ -144,6 +144,8 @@ except Exception:
     print('ERROR: Process interupted due to an error at url', driver.current_url)
     print(traceback.format_exc())
     
+
+
 
 #closing the browser
 driver.close()
